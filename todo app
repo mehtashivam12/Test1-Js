@@ -1,0 +1,53 @@
+//this method is to add todos.
+
+addTask = () => {
+
+let notEmpty = this.state.text.trim().length > 0;
+
+if (notEmpty) {
+
+this.setState(
+
+prevState => {
+
+let { tasks, text } = prevState;
+
+return {
+
+tasks: tasks.concat({ key: tasks.length, text: text }),
+
+text: ""
+
+};
+
+},
+
+() => Tasks.save(this.state.tasks)
+
+);
+
+}
+
+};
+
+//this method is for deletion of todos
+
+deleteTask = i => {
+
+this.setState(
+
+prevState => {
+
+let tasks = prevState.tasks.slice();
+
+tasks.splice(i, 1);
+
+return { tasks: tasks };
+
+},
+
+() => Tasks.save(this.state.tasks)
+
+);
+
+};
